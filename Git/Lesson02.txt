@@ -1,0 +1,103 @@
+#Lesson 2: Configure Git
+
+Git configuration:
+After git is installed, we need to configure some elements of Git. Some are obligatory and others optional.But it is important to mention that some configuration can make our work easier.
+
+##1. Essentials
+
+Config's must have
+
+run this command:
+$git config --global --list
+
+Note: do not be surprised if the system return an error
+fatal: unable to read config file '/root/.gitconfig': No such file or directory
+
+let us configure the MUST HAVE things.
+
+At this moment we are working on gloabal table, global means we are setting up configuration relevant everywhere for this user, until overwritten.
+
+So:
+
+--system - table relevant for the whole machine
+--global - for the current user
+--local - (default) for the current repository
+
+to make some entries:
+
+$git config --gloabal user.name "Merveilles Katumba"
+$git config --global user.email Merveilleskatumba@gmail.com
+
+These two command create our "personality". Of course it can be overwritten with the --local in any of the repos.
+
+And now the file .gitconfig in the root directory of our user exist: ls -al
+
+We can also add on mere important thing.
+
+$git config --global core.editor vim
+
+Now, we can check what we have in our config.
+
+$git config --list -all settings are printed
+$git config --list --global -only (--global) table is listed.
+$git config user.name -selected record is printed.
+
+##2. .git directory structure
+
+Config of the repository
+
+After installing and configuring the must have, the system created a directory and initialized git repo. To list teh content, we can use this command
+$cd test && ls -al
+
+There is a .git directory, which is a hidden one (. on the beginning). This directory is created during git init operation.
+Let us have a look on what is inside this directory.
+$ls -al .git
+
+Let us briefly explain the content of this directory(important files and directories).
+
+hooks directory contains all custom hooks. These are small (usually) scripts which have to be executed before commit, or after, before push, etc.
+
+branches - this is deprecated.
+
+HEAD - pointer to the current branch and its latest commit.
+
+config - configuration file for the repository.
+
+info - the place where you stage the files using git add .
+
+refs - the current state of the whole repo.
+
+objects - commits, trees and blobs are stored here. May be very big.
+
+logs - quite self explanatory.
+
+description - description of the repository.
+
+Let us check what is inside the config file:
+$cat .git/config
+
+##3. Extra
+
+Let us configure more things, these are optional but nice things (Who does not like nice things?).
+
+$git config --global color.status auto
+$git config --global color.branch auto
+$git config --global color.interactive auto
+$git config --global color.diff auto
+$git config --global alias.adog "log --all --decorate --oneline --graph"
+
+Let us explain: A dog is a very popular way to remeber the most useful set of parameters for git log.
+
+$git config --list
+
+We can commit a file in the repo. since we have already configured our user.
+
+$git add .
+
+$git commit <filename> -m "create filename"
+
+Let us execute our alias.
+
+$git adog
+
+This is just a simple example, we can personalize it and go wild.

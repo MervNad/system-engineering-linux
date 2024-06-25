@@ -1,0 +1,31 @@
+#Lesson 5: Visual commit
+
+Commit with default text editor
+Sometimes we are using editors to add commit messages. Let us check how it looks and we can change the default editor.
+
+##1. Use editor to commit files
+
+Text editor for create message for commit
+
+until now, we have been using -m to add commit messages. let us try something different. Imagine we are working in our repo and we have some files in stage. let us commit one of them.
+
+$git commit testfile-01
+
+the default editor appears, which is nano. We can use it to add a commit messsage ot exit.
+
+Default editor
+
+Let us check if we have anything configured
+$git config --global --list | grep editor
+
+If we did not configure the gloabl editor, no output will will come on our terminal.
+we could also check for the system or the local too. (local means specific to the current repo; system means for the whole system).
+the previous command, we ask git to show us the whole confguration in global space and we grep  the outout to find the information about editor only.
+
+Let us change it to our chosen editor(preferred).
+$git config --global core.editor vi
+
+Let us check our config again
+$git config --global --list | grep editor
+
+now the commit message will be using vim and not nano.

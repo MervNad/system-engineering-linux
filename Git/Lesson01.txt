@@ -1,0 +1,29 @@
+#Lesson 1: Install git on Ubuntu
+
+##1.check the packages
+
+check your system:
+
+To check if we have Git installed, we cann do it in different ways.
+command: dpkg -l | grep git.
+
+(The ii in the list means that the package is correctly installed and available.
+
+apt list git -a
+
+apt-cache pkgnames git
+
+or just run git command.
+
+##2. Install git package
+
+install Git
+
+command: apt install -y git
+
+##3. Is installed?
+
+Did we install Git succesfully?
+
+Let's check, by running this command
+command: git --version

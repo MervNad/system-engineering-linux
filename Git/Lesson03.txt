@@ -1,0 +1,98 @@
+#Lesson 3: Commiting the first files
+
+##1. Local init of the repository
+
+Initialize the repository
+
+For example we are working on a local folder or new repository locally (a repository that was not cloned earlier). In this case we must initialize the repository and buld all internal structure needed to work with version control. This process will create .git directory and all content inside.
+
+Step 1.
+
+Create a directory
+$mkdir test-repo
+
+navigate there 
+$cd test-repo
+
+list the content to see if it is empty
+$ls -al
+
+initialize this repository to work with version control
+$git init
+
+Now execute the git status command
+$git status
+
+list to see the content of the repo, notice the presence of .git
+$ls -al
+
+##2. Check status of the repository
+
+Commit first file
+
+create first file and insert soemthing inside.
+$touch newfile && echo hello > newfile
+
+check if git sees the file
+$git status
+
+it shows that this file is untracked
+
+##3. Add files
+
+add file to staging area: this is to inform git that we wish to stage our changes.
+$git add newfile
+
+This command added the file to the stage area.
+$git status
+
+Afer staging a file once, you do not need to repeat this action during the work.
+
+##4. Commit files
+
+Commit the file
+
+Commit is a process to create a revision of the file. A version which will be stored in Version Control.
+
+Double check that the file is staged
+$git status
+
+commit it
+$git commit newfile -m "my first commit"
+
+Byt adding -m <comment> we describe what this commit is about.
+In this case, this is a specif file named newfile that was commited.
+By using -a instead, we are able to commit all files from the repository.
+By using . we will commit changes from current path recursively.
+
+Note: there are best practices in the creation of commit messages.
+
+Confirm that our work was commited and its version control was created.
+
+##5. Add and commit multiples files in one shot
+
+Add and commit multiple files
+
+let us suppose a scenario where we have multiple directories(some empty) and files in our repository. all are untracked.
+
+let us check our current tree(structure)
+$tree
+
+let us run git status and check how things look
+$git status
+
+Git will show untracked files and directories, However, Git will not show empty directories because it decides that it is not necessary to add them at the moment.
+
+Add all files in one command.
+$git add .
+
+Check
+$git status
+
+Note: It is important to know that git add . will add all files in your current working directory, not from repository's root. Therefore if you are in subdirectory, only files from this path will be added.
+
+Commit these files
+$git commit -m "my second commit"
+
+check
+$git status

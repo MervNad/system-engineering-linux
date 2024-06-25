@@ -1,0 +1,98 @@
+#Lesson 4: Remove file from commit
+
+##1 Remove files from stage
+
+Remove files from stage
+
+Let us imagine a situation, you want to remove all staged files from index for some reason.
+Notes: This is not the best situation to be in.
+
+let us suppose that we have a file name testfile-01, and we want to remove it.
+$git rm --cached testfile-01
+
+check
+$git status
+
+Suppose we want to remove more files or all. we can do it recursively.
+$git rm --cached -r .
+
+The . means everything from here (from the current working directory) and -r means recursively.
+
+check
+$git status
+
+##2. Restore previous state
+
+Restore previous state of the file
+
+Let us imagine a scenario where we have staged and commited our work (files and directory)
+
+Check our commit:
+$git log
+
+Check our status:
+$git status
+
+Suppose that we made some modifications after the last commit.
+Suppose that we do not want the changes we made.
+
+check the content of the file we modified
+$cat testfile-01
+
+restore to previous state
+$git checkout testfile-01
+
+check the content if it was restored.
+$cat testfile-01
+
+check our new status
+$git status
+
+testfile-01 is no longer untracked, it is reset to previous state from previous commit using  git checkout command. What we have done is do the checkout of the last indexed state of this file on current branch.
+
+remove all chnages in one short command.
+$git checkout .
+
+check status
+$git status
+
+
+##3. Another way of going back
+
+Reset the current HEAD to the selected state
+
+git reset moves the current pointer in HEAD and branch refs to specific state.
+git checkout does similar thing, but in fact, both of these commands operates on different levels.
+
+Reset has three main ways of operating, but we will touch only two of them. (We will not cover --mixed)
+
+--soft
+
+git log shows that we have many changes done. We have one commit for each file in our example.
+
+$git log
+
+Let us reset the HEAD to the state before commiting the last file.
+
+$git reset --soft HEAD~1
+
+We can check what this command did using
+$git status
+$git log
+ we can even check the content of the last commited file usingcat command.
+$cat testfile-04
+
+Let us explain what happened, With --soft parameter we came back to the previous HEAD of the repository, but all changes which we comited are unchanged.
+
+--hard
+
+This is more powerful
+$git reset --hard HEAD~2
+
+And let's look what happened
+$git status
+$git log
+
+You can even use cat command to check your modified commited files.
+
+Let us explain: We came back two more commits (~HEAD~2) and we said, this time we want to not only move back, but also we want to remove all changeswhich were done.
