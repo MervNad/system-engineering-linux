@@ -1,0 +1,35 @@
+#Lesson 8: Detailed information about previous commits
+
+Git log
+
+We usually use the default git log command. What else, more, we can get from Version Control using git log?
+
+##1. Formatting information from git log
+
+We can enhance what we get from git log, since we understand how it works. We can extract some data from it or format messages, even more we can query them.
+If the log is long, we can quit it using q.
+Let us assume, we have done a lot of work in our repo.
+Just using git log, will show on the terminal very long text in which we can easily miss the information we are looking for. So that infrmation can be unhandy. We can better format the message.
+
+$clear && git log --oneline
+
+--oneline shows only most important info about commits. You have only hash and commit message.
+
+$git show
+this command shows more details about last commit.
+$clear && git log -p
+this command give us more details for all commits.
+$clear && git log --stat
+this command give us some statistics on what amount of work was done in the commit. we can clearly see how many lines were added or removed in each commit.
+$clear && git shortlog
+this command gives us the information sorted by author of commits.
+
+##2. Prettier output
+
+To visualize some work with branches, and more:
+$git log --graph
+
+Let us combine multiple parameters
+$clear && git log --oneline --graph
+
+##3. Formatting

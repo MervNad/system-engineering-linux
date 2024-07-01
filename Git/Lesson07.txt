@@ -1,0 +1,43 @@
+#Lesson 7: Check the differences
+
+Often we want to compare the changes with commited work. more often we use git status, which gives us the current status. But we may want more detailed information.
+
+##1. Check the changes
+
+The command git diff, allows us to check the difference between HEAD and current working directory. Simply put, what was the changed during our recent work.
+
+$git diff
+
+This command checks HEAD by default, however we can modify this simple command.
+
+example of a modification:
+
+$clear && git diff HEAD~1
+
+this command clear the terminal and display what changes happend compared to the position the HEAD is 1 commit back.
+we can speficify the position of the HEAD to a specific file. example:
+$clear && git diff HEAD~1 testfile-01
+
+we will see the information about testfile-01 only in comparison of current working directory and one commit before HEAD.
+
+##2. Staged differences
+
+we saw how git diff shows us the difference between commit and working directory.
+Let us suppose we are working, and some new files are created and staged. 
+But if we use git diff to see the difference between the current working directory and HEAD
+$git diff
+
+we will see nothing about the new file.
+If we want to see the difference between staged work and HEAD, we can explicitly do it through this command.
+
+$git diff --staged
+
+##3. git show
+
+This is a useful command, it gives us information similar to git log.
+By default git show work against HEAD.
+Of course you can use this command to any commit and any file.
+
+$git show
+
+

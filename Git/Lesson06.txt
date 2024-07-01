@@ -1,0 +1,40 @@
+#Lesson 6: Revert Changes
+
+Explanation: git reset move HEAD pointer of your local repository(But this should be avoide, especially the whole point of git version is not just to keep track of the version of the work, but to also manage collaboration of  a big team). This implies that the HEAD should always remain on the mai branch.
+This is not good when you are collaborating and someone else want commits his changes in the sane time.
+Let us see.
+There is a best way and best practice to revert, or "revert" changes is to create new commit from previous one. This will avoid situation that HEAD will be moved somewhere that it should not be.
+
+##1. git revert
+
+Let us suppose we have our repo, with several commits. 
+to check what has been done:
+$git status
+$git log
+
+Now, we realize that the last commit is wrong and we want to move back.
+but because we are working in a team we cannot just reset the HEAD.
+
+let us try this command:
+$git revert --no-edit HEAD
+
+Let us explain this command:
+This command succesfully move back by creating a new commit.
+check it using :
+$git log
+
+By using --no-edit, we informed git that we do not want to pass any message and we ask to use default.
+Basically command goes back one commit from the ones already done, however it also create a new additional commit which inform us what has happened.
+In the background, we undid our last commit. but we did it without changing the work flow and history.
+We can also revert the revert:
+$git revert --no-edit HEAD
+
+We can also revert multiple commits:
+Let us give an example where we want to move back from HEAD y 3 commits and make that place our new HEAD.
+$git revert --edit HEAD~3
+
+Note that --edit is default behavior, therefore we have forced git to provide us possibility to add message. Also often we will experience problems when revert more than one commit and the same file are involved.
+
+Merveilles Katumba.
+
+
