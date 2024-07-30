@@ -1,0 +1,410 @@
+A. Linux Command Line and Shell Scripting Bible.
+
+1. What is Linux?
+The linux system is made up of 4 main parts:
+The Linux kernel.
+The GNU utilities.
+A graphical deeesktop environment.
+Application software.
+
+1.1 Looking into the Linux Kernel:
+This is the core of the Linux system. It controls all the hardware and software on the computer system, allocating hardware when necessary and excuting software when required.
+It was created by Linus Torvalds.
+The kernel is primarily responsible for 4 main functions:
+* System memory management
+* Software program management
+* Hardware management 
+* Filesystem management
+
+A. System memory management
+
+B. Software Program management
+
+C. Hardware Management
+
+D. Filesystem Management
+
+1.2 The GNU Utilities
+
+A. The Core GNU utilities
+
+B. The Shell
+
+1.3 The Linux Desktop Environment
+
+A. The X window System
+
+B. The KDE Desktop
+
+C. The GNOME Desktop
+
+D. The Unity Desktop
+
+E. Other Desktops
+
+1.4 Linux Distributions
+
+A. Core Linux Distributions
+
+B. Specialized Linux Distributions
+
+C. The Linux LiveCD
+
+2. Getting to the Shell
+
+2.1 Reachingthe Command Line
+
+A. Console Terminals
+
+B. Graphical Terminals
+
+2.2 Accessing CLI via a Linux Console terminal
+
+2.3 Accessing CLI via Graphical Terminal Emulation
+
+2.3 Using the GNOME Terminal Emulator
+
+A. Accessing the GNOME Terminal
+shortcut: Ctrl + Alt + T.
+
+B. The Menu Bar
+
+2.4 Using the Konsole Terminal Emulator
+
+A. Accessing the Konsole Terminal
+
+B. The Menu Bar
+
+
+2.5 Using the xterm Terminal Emulator
+
+A. Accessing xterm 
+
+B. Command Line Parameters
+
+3. Basic bash Shell Command
+
+3.1 Starting the Shell
+The GNU bash shell is a program that provides interactive access to the Linux system.
+The /etc/passwd file contains a list of all the system user accouts along with some basic configuration information about each user.
+
+3.2 Using the Shell Prompt
+
+3.3 Interacting with the bash Manual
+The man command provides access to the manual pages stored on the Linux system.
+
+3.4 Navigating the Filesystem
+
+A. Looking at the Linux filesystem
+check: http://www.pathname.com/fhs/
+
+B. Traversing directories
+Use the change directory command(cd)
+
+C. Using absolute directory reference
+An absolute directory reference always begins with a forward slash(/), indicating the system's root.
+
+example: /usr/bin
+
+D. Using relative directory references
+Relative directory references allow you to specify a destination directory reference relative to your current location.
+
+3.5 Listing Files and Directories
+
+A.Displaying a basic listing 
+the ls command at its most basic form displays files and directories located in your current directory (use the pwd command to know your present working directory)
+
+B. Displaying a long listing
+$ ls -l
+$ ls -alF
+
+C. Filtering listing output
+using widlcards through a process called file globbing. (wildcards are officially called metacharacter wildcards)
+such as: *, ?, ! , [], {} etc...
+
+3.6 Handling Files
+
+A. Creating files
+The touch command
+
+B. Copying files
+The cp command
+
+C. Using tab auto-complete
+
+D. Linking files
+Linking files is a great option available in the Linux systerm. If you need to  maintain two(or more) copies of the same file on the system, instead of having separate physical copies, you can use one physical copy and multiple virtual copies, called links. a link is a placeholder in a directory that points to the real location of the file. Two types of file links are available in Linux:
+* A symbolic link: is simply a physical file that points to another file somewhere in the virtual directory structure. The two symbolically linked together files do not share the same contents.
+To create a symbolic link to a file, the original must pre-exist.
+Use the ln command with the -s option to create the symbolic link.
+
+Another to tell that these linked files are separate physical files is by viewing their inode number. The inode number of a file of directory is a unique identification number that the kernel assigns to each object in the filesystem. To view a file or dorectory's inode number, add the -i parameter to the ls command.
+* A hard link: creates a separate virtual file that contains information about the original file and where to locate it. However, theyr are physically the same file. When you reference the hard link file, it's just as if you are referencing the original file. As with the symbolic link, to create a hard link, the original file must pre-exist, except this time no parameter is needed on the ln command.
+
+D. Renaming files
+In the Linux world, renaming files is called moving files.
+The mv command is available to move both files and directories to another location a new name.
+We can notice that when we move the file using the mv command, it changes the name but it keeps the same inode number and timestamp value. This is because the mv command only affects the name.
+
+E. Deleting files
+
+In the Linux world, deleting is called removing. The command to remove files in the bash shell is rm. The basic form of the rm command is simple:
+$ rm -i fall
+The -i command parameter prompts you to  make sure that you're serious about removing the file. The shell has no recycle bin or trashcan. After you remove a file , it's gone forever. Therefore, a good habit is to always tack on the -i parameter to the rm command. We can always use wildcrd metacharacters to remove groups of files. Don't forget the -i option to preotect yourself:
+
+$ rm -i f?ll
+
+3.7 Managing Directories
+
+A. Creating directories
+Creating a new directories in Linux is easy -- just use the mkdir command:
+$ mkdir New_Dir
+To create several directories and subdirectories at the same time, just add the -p option parameter.
+
+B. Deleting directories:
+Removing directories can be tricky, and for good reason. There are lots of opportunities  for bad things to happen when you start deleting directories. Therefore, the shell tries to protect us from accidental catastrophes as mmuch as possible. The basic command for removing a directory is rmdir:
+
+$ touch New_Dir/my_file
+$ ls -li New_Dir/
+
+$ rmdir New_Dir
+
+By default the rmdir command only works for removing empty directories.
+The rmdir command has no -i option.
+If we are really sure about wanting to remove a non-empty directory, 
+We can use the rm command, with the option -r allows the command to descend into the directory. This is very helpful when we have multiple directories and files to delete.
+
+Warning: 
+$ rm -rf
+The rm -rf command gives no warning and no fanfare. This, of course, is an extremely dangerous tool to have, especially if using superuser priviledge. 
+
+3.8 Viewing File Contents
+You can use several command for looking inside files without having to pull out a text editor utility.
+
+A. Viewing the file type
+Before we try to display a file, try to get a handle on what type of file it is.If we try to display a binary file, we get a lots of gibberish on the monitor and may even lock up the terminal emulator.
+The file command is a handy little utility to have around. it can peek inside of a file and determine just what kind of file it is:
+
+$ file my_file
+
+B. Viewing the whole file
+If we have a large file on your hands, you may want to be able to see what's inside of it. Linux has three different commands that can help you here.
+
+a. Using the cat command: 
+The cat command is a handy tool for displaying all the data inside a text file:
+Beside showing the contents of the text file, the cat command has a few parameters that can help out.
+
+The -n parameter numbers all the lines for you:
+Very useful when examining scripts.
+The -b parameter shows the number of lines that have text in them.
+The -T is used when we do not want tab characters to appear.
+
+b. Using the more command
+The main drawback of the cat command is that you cannot control what's happening after you start it. To solve that problem, developpers created the more command. The more command displays a text file, but stops after it displays each page of data.
+The more command is a pager utility.
+
+c. Using the less command
+From its name, it sounds like it shouldn't be as advanced as the more command. However, the less command name is actually a play on words and is an advanced version of the more command ( the less command name comes from the phrase "less is more"). It provides several very handy features for scroling both forward and backward through a text file, as well as some pretty advanced searching capabilities.
+
+C. Viewing parts of a file
+If we have a long file, but we only need specific information, we cannot use the cat, more commands. Linux provides us several options:
+
+a. Using the tail command
+The tail command displays the last lines in a file. By default it shows the last 10 lines in the file.
+We can use the -n option on the tail command to be more specific.
+
+The -f parameter is a pretty cool feature of the tail command. It allows you to peek inside a file as the file is being used by other processes. It is used to monitor system log.
+
+b. Using the head command
+The head command displays  a file's first group of lines. 
+Similar to the tail it take the -n option to specify the number of line.
+Or we can just specify the number of line we want without the -n option.
+It does not support the -f option since the start of a file does not usually change.
+
+4. More bash Shell Commands
+
+4.1 Monitoring Programs
+It is important to keep track of what's running on the system.
+
+A. Peeking at the processes
+When a program runs on the system, it's referred to as a process.To examine these processes, we need to become familiar with the ps command, the Swiss Army Knife of utilities. It can produce lots of information about all the programs running on your system.
+The ps command is very robust and complex. Therefore, not easy to master. 
+At its default use, it only provide the processes that belong to the current user and that are running on the current terminal.
+
+The GNU ps command used in Linux systems supports three different types of command line parameters:
+
+a. Unix-style parameters:which are preceded by a dash
+Originated with the original ps command that ran on the AT&T Unix systems invented by Bell Labs.
+
+b. BSD-style parameters: which are not preceded by a dash
+The Berkeley Software Distribution(BSD) was a version of Unix developped at the University of California, Berkeley. Containing very subtle difference from the AT&T Unix system. It was the cause of many Unix wars over the years.
+
+c. The GNU long parameters: which are preceded by a double dash.
+developped by GNU developers. bring a touch to the existing ones.
+
+B. Real-time process monitoring
+The ps command has a drawback, only display information for a specific point in time. Therefore, keeping track of processes that are frequently swapped in and out of memory using ps command is very hard.
+We can use the top command to deal with such task. It does the same thing like the ps command but does it in real-time.
+
+C. Stopping processes
+In Linux, processes communicate with each other using signals.
+We have two commands available in Linux allow you to send process signals to running processes.
+
+a. The kill command
+The kill command allows you to send signals to processes based on their process ID(PID).
+By default, the kill command sends a TERM signal to all the PIDs listed on the command line. The kill command does not accept unfortunately the command name only its PID.
+To send a process signal, you must either be the owner of the process or be logged in as the root user.
+
+$ kill 3940
+-bash: kill: (3940) - Operation not permitted
+$
+After using the kill command, you should check that it worked using ps or top comman.
+
+b. The killall command
+The killall command is a powerful way to stop processes by using their names rather than the PID numbers. It allows the use of wildcard characters as well, making it a very useful tool when you have a system that's gone awry:
+
+# killall http*
+#
+
+4.2 Monitoring Disk Space
+It is very important for a Linux system administrator to keep track of the disk on the system.
+
+A. Mounting media
+The Linux filesystem combines all media disks into a single virtual directory.
+mounting: placing a new media disk in the virtual directory before even you use it.
+
+a. The mount command
+By default it displays a list of media devices currently mounted on the system.
+Use man mount to read more about the commad before using it.
+
+b. The umount command
+The command used to unmount devices is umount.
+Read the man page for better usage.
+
+B. Using the df command
+The df command allows you to easily see what's happening on all the mounted disks.
+Always read the man page of the command to better use it.
+With the df command the current processes using files or deleting files are not accounted.
+
+C. Using the du command
+The du command shows the disk usage for a specific directory(by default, the current directory). 
+The use of this command alone can be useless, use the man page for a use suiting your need.
+
+4.3 Working with Data Files
+
+A. Sorting data
+The sort command is a popular function that comes in handy when working with large amounts of data.
+Use the man page of the sort command for better use suiting your need.
+
+B. Searching for data
+The grep command can help search for a specific key word in a large file.
+Its format is :
+	grep [options] pattern [file]
+Read the man page of the grep command for better use.
+The grep command is very popular.Therefore, over its lifetime it underwent various improvement by Unix developers.
+
+C. Compressing data
+Like the zip utility in window system, Linux also provides several utilities for compressing large files.
+Such as: bzip2, compress, gzip, zip.
+
+Some may not exist by default in your distribution, so maybe a need to install before use. 
+Carefully read the man page for better usage of these utilities.
+
+D. Archiving data
+We just read and used the zip command and its variations to compress and archive, but the most used command for achiving is the tar command.
+Historically, it was used for writing files to a tape device for archiving. But it can also write the output to a file. Therefore, became the popular way to archive data in Linux.
+This Linux utility can archive a directory stucture into a single file that can easily be ported to another system.
+Its format is:
+	tar function [option] object1 object2 ...
+
+This command is very powerful. Especially in the distribution of open source program.
+
+5. Understanding the Shell
+
+5.1 Exploring Shell Types
+The shell program that the system starts depends on the user ID configuration. 
+In the /etc/passwd file, the user ID has its default shell program listed in field #7 of its record. The default shell is started whenever the user logs into or starts a terminal.
+
+For many Linux system the bash is the default shell, even though many distributions are migrating to the zsh as a default.
+Note: 
+There is a default interactive shell that starts whenever the user logs into or starts a terminal.
+Another default shell, /bin/sh, is the default system shell. This is used for system shell scripts.
+
+$ cat /etc/shells
+this command will show you the shells available in your system.
+$ ls -l /bin/sh
+this command will show default system shell.
+
+among the shells in your system, you can log at ease into one of them just by typing the absolute path of the shell. and you can exit by simply typing exit command.
+
+5.2 Exploring Parent and child Shell Relationships
+
+The default interactive shell is the parent shell.
+when we start a new shell by providing its absolute path, a new shell is created. This is a child shell.
+you can read more about each shell by reading their man page or the --help option.
+
+A. Looking at process lists
+On a single line, you can designate  list of commands to be run one after another. This is done by enteing a command list using a semicolon(;) between commands:
+A process list is a command grouping type. Adding a parentheses and turning the command list into a process list creates a subshell to execute the commands.
+To indicate if a subshell was created, we use the command 
+$ echo $BASH_SUBSHELL.
+Thus, a process list is a command grouping enclosed with parentheses, which creates a subshell to execute the command(s). It is possible to create a grandchild subshell by embedding parentheses within a process list:
+$ (pwd ; echo $BASH_SUBSHELL)
+
+$ (pwd ; (echo $BASH_SUBSHELL)) 
+
+B. Creatively using subshells
+
+a. Investigating background mode
+Running a command in background mode allows the command to be processed and frees up your CLI for other use.
+The command sleep is the best example:
+Read the man page.
+
+To put a command into background mode, the & character is tacked onto its end. Putting the sleep command into background mode allows a little investigation with the ps command.
+$ sleep 300&
+ 
+The jobs command, like the ps can help to display background job information.
+
+b. Putting process lists into the background
+
+We can do various jobs by putting a process list in the background.
+example: creating back up files with tar, and many more.
+
+c. Looking at co-processing
+Co-processing does two things at the same time. Create a subshell in background mode and executes a command within that subshell.
+The coproc command is used along with the command to be executed in the subshell.
+Co-processing allows you to send/receive information to the process running in the subshell.
+
+5.3 Understanding Shell Built-In Commands
+
+We have built-in command and non-built-in or external commands, they operate very differently.
+
+A. Looking at external commands
+External command, sometimes called a filesystem command, is a program that exits outside of the bash shell. Not built into the shell program. They are typically located in /bin, /usr/bin, /sbin, or /usr/sbin.
+We can use the which command or the type command to find the filename of a command.
+Whenever an external command is executed, a child process is created. This is called forking. Due to this , external program can be a little expensive.
+
+B. Looking at built-in commands
+These are different in that they do not need a child process to execute. They were compiled into the shell and thus are part of the shell's toolkit.
+No external program file exists to run them.
+The cd command and the exit command are example.
+The type command will tell you if a command is built-in
+These commands are fast and efficient.
+Some commands have multiple flavors meaning external and built-in.
+The type command with option -a will tell.
+The which command shows only the external command file.
+
+a. Using the history command
+This is a very useful built-in command. The bash shell keeps track of the commands you have used. Therefore, recall these commands and even reuse them.
+Reading the man for history command will give more information.
+
+b. Using command aliases
+The alias command is another shell built-in command. A command alias allows you to create an alias name for common commands (along with their parameters) to help keep your typing to a minimum.
+
+After you define an alias value, you can use it at any time in your shell, including in shell scripts. Because command aliases are built-in commands, an alias is valid only for the shell process in which it is defined.
+But we can also make an alias value permanent across subshells by using environment variables.
+
+6. Using Linux Environment Variables
+
+6.1 Exploring Environment Variables
+
